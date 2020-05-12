@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
 
@@ -15,7 +15,7 @@ export const GlobalStyles = createGlobalStyle`
 
 
 body {
-  background-color: ${({ theme }) => theme.body}; 
+  background-color: ${({ theme }) => theme.body};
   padding: 0px;
   margin: 0px;
   margin-top: 80px;
@@ -55,7 +55,7 @@ body {
 }
 
 .header-left {
-  color: ${({ theme }) => theme.yellowText}; 
+  color: ${({ theme }) => theme.yellowText};
   font-weight: bold;
   font-size: 20px;
   cursor: pointer;
@@ -89,8 +89,29 @@ body {
   color: ${({ theme }) => theme.formColor};
   opacity: .5;
 }
+.form-controlb {
+  width: 100%;
+  margin-left:20%;
+  text-align:center
+  height: 98%;
+  outline: none;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  font-size: 19px;
+  padding-left: 10px;
+  color: ${({ theme }) => theme.formColor};
+  opacity: .5;
+}
 
 .form-control:focus {
+  background-color: ${({ theme }) => theme.movieBackground};
+  border-color: #121620;
+  box-shadow: none;
+  color: ${({ theme }) => theme.formColor};
+opacity: 1;
+}
+.form-controlb:focus {
   background-color: ${({ theme }) => theme.movieBackground};
   border-color: #121620;
   box-shadow: none;
@@ -174,7 +195,32 @@ opacity: 1;
   outline: none;
 }
 
+.year-selector {
+  background-color: #e7d10a;
+  border: 1px solid ${({ theme }) => theme.borderColor};
+  color: #1e2126;
+  font-weight: bold;
+  padding: 10px 25px;
+  width:150px;
+  margin-left:20px;
+  justify-content: center;
+  font-size: 15px;
+  border-radius: 5px;
+  outline: none;
+}
+
+@media screen and (max-width:768px){
+  .year-selector{
+    display:none;
+  }
+}
+
 .server-selector > option {
+  background-color: ${({ theme }) => theme.body};
+  color: ${({ theme }) => theme.yellowText};
+  padding: 1em .5em;
+}
+.year-selector > option {
   background-color: ${({ theme }) => theme.body};
   color: ${({ theme }) => theme.yellowText};
   padding: 1em .5em;
@@ -249,6 +295,9 @@ div.skeleton-movies {
 @media (max-width: 450px) {
 
     .server-selector {
+        padding: 10px .3em;
+    }
+    .year-selector {
         padding: 10px 0px;
     }
 }
@@ -262,16 +311,14 @@ div.movie {
     margin: .9em;
     display: block;
   }
-  
+
   div.movie-image {
     height: 80%;
     width: 100%;
-    margin: auto;
-    justify-content: center;
     left: 0;
     position: relative;
   }
-  
+
   div.movie-image img {
     box-shadow: 2px 7px 8px 2px ${({ theme }) => theme.movieBoxShadow};
     height: 20em;
@@ -283,12 +330,12 @@ div.movie {
     cursor: pointer;
     object-fit: cover;
   }
-  
+
   div.movie-image img:hover {
     box-shadow: 2px -2px 8px 2px ${({ theme }) => theme.movieBoxShadow};
     transform: translateY(-3%);
   }
-  
+
   .download-btn {
     position: absolute;
     bottom: -.7em;
@@ -307,9 +354,8 @@ div.movie {
     cursor: pointer;
     box-shadow: 0px 0px 7px -2px #121315;
   }
-  
+
   .download-btn:active {
-    transform: translateY(3%);
     background: #dcc80d;
   }
 
@@ -326,11 +372,11 @@ div.movie {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    background-color: ${({ theme }) => theme.movieBackground}; 
-    border-end-end-radius: .39em;
-    border-end-start-radius: .39em;
+    background-color: ${({ theme }) => theme.movieBackground};
+    border-bottom-bottom-radius: .39em;
+    border-bottom-start-radius: .39em;
   }
-  
+
   .movie__about .name {
     font-size: .9em;
     line-height: 1.5;
@@ -338,14 +384,26 @@ div.movie {
     color: ${({ theme }) => theme.text};
     text-transform: capitalize;
   }
-  
+
+  .searchInt{
+    color: ${({ theme }) => theme.text}
+  }
+
+  .cancel-btn{
+    color: ${({ theme }) => theme.text}
+  }
+
+
+
+
+
   .movie__about-meta {
     display: flex;
     justify-content: space-between;
     margin-top: .78em;
     align-items: center
   }
-  
+
   .movie__about-meta .movie-source {
     background-color: #e7d10a;
     padding: .2em .5em;
@@ -358,11 +416,11 @@ div.movie {
   .movie-size {
     font-size: .75em;
     font-weight: 600;
-    color: ${({ theme }) => theme.text}; 
+    color: ${({ theme }) => theme.text};
     opacity: 0.5;
     text-transform: uppercase;
   }
-  /* Movie About Details End */ 
+  /* Movie About Details End */
 
   /* Modal boostrap style */
 
@@ -373,7 +431,7 @@ div.movie {
   }
   /* Modal boostrap style End */
   /* skeleton loader styles */
-  
+
   div.skeleton-movie {
     width: 220px;
     min-height: 30vh;
@@ -397,7 +455,7 @@ div.movie {
     animation: blink 1s infinite;
     -webkit-animation-direction: alternate-reverse;
   }
-  
+
   .skeleton-download-btn {
     position: absolute;
     top: 80%;
@@ -415,11 +473,11 @@ div.movie {
     padding: 0px;
     box-shadow: 0px 0px 7px -2px #121315;
   }
-  
+
   div.skeleton-movie__about p {
     border-radius: 5px;
   }
-  
+
   p.skeleton-name {
     font-size: 20px;
     font-weight: 700;
@@ -434,7 +492,7 @@ div.movie {
     animation-delay: .3s;
     -webkit-animation-direction: alternate-reverse;
   }
-  
+
   p.skeleton-by,
   p.pub-by {
     font-size: 13px;
@@ -451,17 +509,17 @@ div.movie {
     animation-delay: .5s;
     -webkit-animation-direction: alternate-reverse;
   }
-  
-  
+
+
   @keyframes blink {
     to {
       opacity: .5;
     }
   }
-  
 
 
- 
+
+
 .scroll {
   opacity: 0.8;
   background-color: #e7d10a;
@@ -593,7 +651,7 @@ select {
 
   .movie__about {
     border-top-right-radius: 0.39em;
-    border-end-start-radius: initial;
+    border-bottom-start-radius: initial;
     height: 100%;
   }
 
@@ -655,7 +713,7 @@ select {
     margin-top: initial;
     border-radius: .2em;
   }
-  
+
   p.skeleton-by,
   p.pub-by {
     width: 30%;
@@ -671,7 +729,7 @@ select {
     width: 2.5em;
   }
   }
-  
+
   .gophie-alert {
     position: fixed !important;
     bottom: -.2em;
@@ -684,6 +742,11 @@ select {
 }
 
 .gophie-alert a {
+  color: ${({ theme }) => theme.yellowText} !important;
+  text-decoration: none;
+}
+
+.gophie-link {
   color: ${({ theme }) => theme.yellowText} !important;
   text-decoration: none;
 }
