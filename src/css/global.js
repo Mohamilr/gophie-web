@@ -367,7 +367,7 @@ div.movie {
   /* Movie About Details */
   .movie__about {
     width: 100%;
-    height: 8em;
+    height: 11em;
     padding: .5em;
     display: flex;
     flex-direction: column;
@@ -394,8 +394,11 @@ div.movie {
   }
 
 
-
-
+  @media (max-width: 561px) {
+    .gophie-modal-rating-container__average{
+      margin-bottom: 0.7em;
+  }
+  }
 
   .movie__about-meta {
     display: flex;
@@ -645,7 +648,7 @@ select {
   .download-btn {
     height: 43px;
     width: 43px;
-    bottom: -0.5em;
+    bottom: 0.3em;
     right: -9em;
   }
 
@@ -739,6 +742,10 @@ select {
     border: 0;
     background-color: ${({ theme }) => theme.movieBackground} !important;
     color: ${({ theme }) => theme.text} !important;
+}
+
+.gophie-modal-rating-container__average--container__on-card p {
+  color: ${({ theme }) => theme.text}
 }
 
 .gophie-alert a {
