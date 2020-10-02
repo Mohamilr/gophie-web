@@ -20,120 +20,126 @@ class Popup extends Component {
       play: false,
       referral_id: "",
       error: false,
-      episodeLink: []
+      episodeLink: [],
+      show: false
     };
   }
 
-  componentDidMount() {
-    this.getAverage();
-    this.getRatings();
+  // componentDidMount() {
+  //   this.getAverage();
+  //   this.getRatings();
 
-    if (this.props.movie.engine === 'AnimeOut') {
-      const episodeLinkArray = []
-      const SDownloadLink = this.props.movie.s_download_link;
-      for (const [downloadTxt, downloadLink] of Object.entries(SDownloadLink)) {
-        const downloadTxtStrip=downloadTxt.replace("[AnimeOut]","").replace("[Erai-raws]", "");
-        episodeLinkArray.push(<a className="episode-link " href={downloadLink} key={downloadLink}>{downloadTxtStrip}</a>);
-      }
+  //   if (this.props.movie.engine === 'AnimeOut') {
+  //     const episodeLinkArray = []
+  //     const SDownloadLink = this.props.movie.s_download_link;
+  //     for (const [downloadTxt, downloadLink] of Object.entries(SDownloadLink)) {
+  //       const downloadTxtStrip=downloadTxt.replace("[AnimeOut]","").replace("[Erai-raws]", "");
+  //       episodeLinkArray.push(<a className="episode-link " href={downloadLink} key={downloadLink}>{downloadTxtStrip}</a>);
+  //     }
 
-      this.setState({episodeLink: [...episodeLinkArray]})
-    }
-  }
+  //     this.setState({episodeLink: [...episodeLinkArray]})
+  //   }
+  // }
 
-  shareMovie = () => {
-    axios
-      .post(this.state.ratings_api + "/referral/", {
-        ip_address: this.props.ip_address,
-        referral_id: this.props.movie.referral_id,
-      })
-      .then((res) => {
-        this.setState(
-          {
-            referral_id: res.data,
-          },
-          console.log(`Referral ID of movie is ${res.data}`)
-        );
-      });
-  };
+  // shareMovie = () => {
+  //   axios
+  //     .post(this.state.ratings_api + "/referral/", {
+  //       ip_address: this.props.ip_address,
+  //       referral_id: this.props.movie.referral_id,
+  //     })
+  //     .then((res) => {
+  //       this.setState(
+  //         {
+  //           referral_id: res.data,
+  //         },
+  //         console.log(`Referral ID of movie is ${res.data}`)
+  //       );
+  //     });
+  // };
 
-  getAverage = () => {
-    const { movie } = this.props;
-    axios
-      .post(this.state.ratings_api + "/movie/ratings/average/", {
-        referral_id: movie.referral_id,
-      })
-      .then((res) => {
-        this.setState({
-          ratings: res.data,
-        });
-      })
-      .catch((err) => {
-        if (err) {
-          this.setState({
-            error: true,
-          });
-        }
-      });
-  };
+  // getAverage = () => {
+  //   const { movie } = this.props;
+  //   axios
+  //     .post(this.state.ratings_api + "/movie/ratings/average/", {
+  //       referral_id: movie.referral_id,
+  //     })
+  //     .then((res) => {
+  //       this.setState({
+  //         ratings: res.data,
+  //       });
+  //     })
+  //     .catch((err) => {
+  //       if (err) {
+  //         this.setState({
+  //           error: true,
+  //         });
+  //       }
+  //     });
+  // };
 
-  getRatings = () => {
-    const { movie } = this.props;
-    axios
-      .post(this.state.ratings_api + "/movie/rating/", {
-        referral_id: movie.referral_id,
-        ip_address: this.props.ip_address,
-      })
-      .then((res) => {
-        if (res.data !== null) {
-          this.setState({
-            ip_rating: res.data.score,
-          });
-        }
-      })
-      .catch((err) => {
-        if (err) {
-          this.setState({
-            error: true,
-          });
-        }
-      });
-  };
+  // getRatings = () => {
+  //   const { movie } = this.props;
+  //   axios
+  //     .post(this.state.ratings_api + "/movie/rating/", {
+  //       referral_id: movie.referral_id,
+  //       ip_address: this.props.ip_address,
+  //     })
+  //     .then((res) => {
+  //       if (res.data !== null) {
+  //         this.setState({
+  //           ip_rating: res.data.score,
+  //         });
+  //       }
+  //     })
+  //     .catch((err) => {
+  //       if (err) {
+  //         this.setState({
+  //           error: true,
+  //         });
+  //       }
+  //     });
+  // };
 
-  rateMovie = (value) => {
-    const { movie } = this.props;
-    axios
-      .post(this.state.ratings_api + "/rate/", {
-        referral_id: movie.referral_id,
-        ip_address: this.props.ip_address,
-        score: value,
-      })
-      .then((res) => {
-        if (res.data !== null) {
-          this.setState({
-            ip_rating: res.data.score,
-          });
-        }
-        // retrieve average to force rerender
-        this.getAverage();
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err) {
-          this.setState({
-            error: true,
-          });
-        }
-      });
-  };
+  // rateMovie = (value) => {
+  //   const { movie } = this.props;
+  //   axios
+  //     .post(this.state.ratings_api + "/rate/", {
+  //       referral_id: movie.referral_id,
+  //       ip_address: this.props.ip_address,
+  //       score: value,
+  //     })
+  //     .then((res) => {
+  //       if (res.data !== null) {
+  //         this.setState({
+  //           ip_rating: res.data.score,
+  //         });
+  //       }
+  //       // retrieve average to force rerender
+  //       this.getAverage();
+  //     })
+  //     .catch((err) => {
+  //       console.log(err);
+  //       if (err) {
+  //         this.setState({
+  //           error: true,
+  //         });
+  //       }
+  //     });
+  // };
 
-  handlePlayRequest(e) {
-    e.preventDefault();
-    this.setState({ play: true });
-  }
+  // handlePlayRequest(e) {
+  //   e.preventDefault();
+  //   this.setState({ play: true });
+  // }
 
-  handleStopRequest(e) {
-    e.preventDefault();
-    this.setState({ play: false });
+  // handleStopRequest(e) {
+  //   e.preventDefault();
+  //   this.setState({ play: false });
+  // }
+
+  //
+  handleShow () {
+    this.setState({show: true});
   }
 
   render() {
@@ -142,9 +148,12 @@ class Popup extends Component {
     } = this.props;
 
     return (
-      <Modal
+      <div>
+        <button onClick={() => this.handleShow()}>hello here</button>
+        {this.state.show && (
+          <Modal
         show={this.props.show}
-        onHide={() => this.props.onHide()}
+        // onHide={() => this.props.onHide()}
         size="lg"
         aria-labelledby="contained-modal-title-vcenter"
         dialogClassName="dialog-theme"
@@ -153,17 +162,17 @@ class Popup extends Component {
       >
         <Modal.Body className="gophie-modal">
           <section className="gophie-modal__img">
-            <img
+            {/* <img
               src={
                 this.props.movie.cover_photo_link === ""
                   ? "No image"
                   : this.props.movie.cover_photo_link
               }
               alt={this.props.movie.name}
-            />
+            /> */}
 
             {/* Video Stream Play Icon */}
-            {this.state.play ? (
+            {/* {this.state.play ? (
               <a
                 id="stop-video"
                 className="video-stop-button"
@@ -188,14 +197,14 @@ class Popup extends Component {
                   }
               </div>
 
-            )}
+            )} */}
             {/* Video Stream Play Icon */}
           </section>
 
           <section className="gophie-modal__body">
             <Modal.Header className="gophie-modal__body--header" closeButton>
               <Modal.Title id="contained-modal-title-vcenter">
-                {this.props.movie.name}
+            jjjj  {/* {this.props.movie.name} */}
               </Modal.Title>
             </Modal.Header>
             {this.state.play ? (
@@ -212,7 +221,7 @@ class Popup extends Component {
                     height="90%"
                   />
                 </div>
-                {greekFromEnglish(this.props.movie.engine) === "Alpha" ? (
+                {/* {greekFromEnglish(this.props.movie.engine) === "Alpha" ? (
                   <div className="player-error-alert">
                     <p className="player-error-message">
                       Streaming from alpha is problematic, suggest{" "}
@@ -227,7 +236,7 @@ class Popup extends Component {
                       instead
                     </p>
                   </div>
-                ) : null}
+                ) : null} */}
                 {isIOS ? (
                   <div className="player-error-alert">
                     <p className="player-error-message">
@@ -262,10 +271,10 @@ class Popup extends Component {
 
                       <p className="em-rate">
                         <span className="em-span">by</span>
-
-                        {this.state.ratings.by
+iii
+                        {/* {this.state.ratings.by
                           ? Math.round(this.state.ratings.by)
-                          : 0}
+                          : 0} */}
                       </p>
                     </div>
                   </div>
@@ -284,16 +293,16 @@ class Popup extends Component {
                 </div>
 
                 <div className="gophie-modal__body--description scollable-container">
-                  {this.props.movie.description === ""
+uuuuu{/* {this.props.movie.description === ""
                     ? "Seems like the description for this movie is missing"
-                    : this.props.movie.description}
+                    : this.props.movie.description} */}
                 </div>
                 <div>
 
                 <div>
 
                 </div>
-                  {
+                  {/* {
                     this.props.movie.name !== "AnimeOut" ?
                       null :
                       (<div>
@@ -305,13 +314,18 @@ class Popup extends Component {
                           {this.state.episodeLink}
                         </div>
                       </div>)
-                  }
+                  } */}
                 </div>
               </section>
             )}
           </section>
         </Modal.Body>
       </Modal>
+        )}
+
+
+      </div>
+
     );
   }
 }
